@@ -1,5 +1,7 @@
 package bean;
 
+import Util.Chessboard;
+
 import java.io.Serializable;
 
 /**

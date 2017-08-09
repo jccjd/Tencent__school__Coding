@@ -1,7 +1,5 @@
 package Util;
 
-import bean.GameDate;
-import bean.IOUtil;
 import bean.User;
 
 import javax.swing.*;
@@ -9,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 棋盘
@@ -20,7 +19,6 @@ public class Chessboard extends JFrame{
     private JMenu ManvsMan;
     private JMenuItem MM_Choosewhite;
     private JMenuItem MM_Chooseblack;
-    private Draw.GetInfoFromServer serverInfo;
 
     private JMenu ManvsAI;
     private JMenuItem MA_Choosewhite;
@@ -29,7 +27,6 @@ public class Chessboard extends JFrame{
     private Draw draw;/*绘制棋盘区域*/
     public static JLabel userInfo;/*显示用户信息*/
     public static JLabel gameInfo;/*游戏信息*/
-
 
     public Chessboard() {
         super("五子棋");
@@ -100,9 +97,8 @@ public class Chessboard extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                draw.getUser().setColor(1);
-
                 draw.setGameState(1);
+                draw.getUser().setColor(1);
                 draw.newGame();
                 userInfo.setText("你执黑棋");
                 gameInfo.setText("游戏开始,黑棋先下");
@@ -110,22 +106,16 @@ public class Chessboard extends JFrame{
                 /*连接服务器*/
                 try {
                     draw.connectServer();
-
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-
             }
         });
         MM_Choosewhite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (serverInfo.getServerColor() != 2) {
-                    draw.getUser().setColor(2);
-                } else {
-                    gameInfo.setText("已被选了");
-                    return;
-                }
+                draw.getUser().setColor(2);
+
                 draw.setGameState(1);
                 draw.newGame();
                 userInfo.setText("你执白棋");

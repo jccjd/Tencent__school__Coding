@@ -311,6 +311,7 @@ public class Draw extends JPanel {
                             [date.getPoint().getY()]
                             = date.getUser().getColor();
                     serverColor = date.getUser().getColor();
+                    System.out.println(serverColor);
                     repaint();
                     changeColor();
                 } catch (IOException e) {
